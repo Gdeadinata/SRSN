@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url('asset/back.png')  repeat;
+    background-size: 200px 200px;
+    background-position: center;
+}
+
+/* Header & Judul */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+}
+
+/* Mengatur posisi logo di kiri dan tombol menu di kanan */
+.header .logo {
+    order: 1;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    order: 2; /* Pindahkan tombol menu ke kanan */
+}
+
+.Navbar {
+    display: flex;
+    align-items: center;
+    order: 3; /* Posisi menu navigasi di kiri setelah logo dan tombol */
+}
+
+.Navbar a {
+    position: relative;
+    font-size: 18px;
+    color: rgb(145, 145, 145);
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+.Navbar a.highlighted {
+    color: #ffffffee;
+}
+
+.Navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: 0.3s;
+}
+
+.Navbar a:hover::before {
+    width: 100%;
+    height: 2px;
+    background-color: #cfcfcf;
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px;
+    }
+
+    .Navbar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 101;
+    }
+
+    .Navbar.active {
+        display: flex;
+    }
+
+    .Navbar a {
+        margin: 15px;
+        color: #fff;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Gambar */
+.bg-image {
+    position: relative;
+    width: 100%;
+    height: 50vh; /* Atur tinggi sebagai persentase dari viewport height */
+    overflow: hidden;
+}
+
+.bg-image img {
+    width: 100%;
+    height: 100%; /* Mengatur gambar untuk memenuhi tinggi elemen .bg-image */
+    object-fit: cover; /* Mengatur gambar agar menutupi area dengan proporsi yang sesuai */
+}
+
+/* Media querry Gambar */
+@media (max-width: 768px) {
+    .bg-image {
+        height: 40vh; /* Menyesuaikan tinggi untuk layar lebih kecil */
+    }
+}
+
+@media (max-width: 480px) {
+    .bg-image {
+        height: 30vh; /* Menyesuaikan tinggi untuk layar sangat kecil */
+    }
+}
+/* End Header */
+
+.TK {
+    margin: 100px 20px; /* Menyesuaikan jarak dengan padding */
+    padding: 20px;
+}
+
+.Tentang-Kreator {
+    display: flex;
+    align-items: center; /* Menyelaraskan item secara vertikal */
+    text-align: left;
+    overflow: hidden;
+    padding: 50px;
+    width: 100%;
+    background: url('Black back.png') repeat; 
+    background-size: cover; /* Menyesuaikan gambar agar menutupi seluruh area section */
+    border-radius: 20px;
+    position: relative; /* Mengatur posisi untuk teks overlay */
+}
+
+.Tentang-Kreator-image {
+    width: 20%; /* Mengatur lebar gambar */
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px; /* Memberikan jarak antara gambar dan teks */
+    transition: opacity 0.5s;
+}
+
+.Tentang-Kreator-content {
+    flex: 1; /* Bagian konten mengambil sisa ruang */
+    color: #d4d4d4;
+}
+
+.Tentang-Kreator h2 {
+    padding-top: 1rem;
+    text-align: center;
+    color: #d4d4d4;
+    margin-bottom: 20px; /* Memberikan jarak di bawah judul */
+}
+
+.Tentang-Kreator p {
+    text-align: justify;
+    margin: 0;
+}
+
+/* Responsive Isi */
+@media (max-width: 768px) {
+    .Tentang-Kreator {
+        flex-direction: column; /* Mengatur tata letak vertikal untuk layar kecil */
+        align-items: center;
+    }
+    
+    .Tentang-Kreator-image {
+        width: 100%; /* Memastikan gambar menyesuaikan lebar layar */
+        height: auto;
+    }
+}
+/* End Responsive Isi */
+
+/* Loading */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    border: 5px solid #000; /* Darker border color */
+    border-top: 5px solid #fff; /* Bright white for contrast */
+    border-radius: 50%;
+    width: 60px; /* Slightly larger for better visibility */
+    height: 60px; /* Matching the width */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+body.loaded #loading-overlay {
+    display: none;
+}
+/* Loading */
+
+/* Footer */
+footer {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ccc;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-section {
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 100px;
+}
+
+.nav-section {
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.social-media-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center icons horizontally */
+    gap: 30px; /* Jarak antar ikon vertikal */
+}
+
+.social-icon {
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #007bff;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+    .footer-section {
+        align-items: flex-start;
+    }
+
+    .nav-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+    }
+
+    nav ul {
+        text-align: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #000;
+    }
+    
+    .social-media-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+/* End Footer */

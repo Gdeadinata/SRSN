@@ -1,0 +1,590 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url('asset/back.png')  repeat;
+    background-size: 200px 200px;
+    background-position: center;
+}
+
+/* Header & Judul */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+}
+
+/* Mengatur posisi logo di kiri dan tombol menu di kanan */
+.header .logo {
+    order: 1;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    order: 2; /* Pindahkan tombol menu ke kanan */
+}
+
+.Navbar {
+    display: flex;
+    align-items: center;
+    order: 3; /* Posisi menu navigasi di kiri setelah logo dan tombol */
+}
+
+.Navbar a {
+    position: relative;
+    font-size: 18px;
+    color: rgb(145, 145, 145);
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+.Navbar a.highlighted {
+    color: #ffffffee;
+}
+
+.Navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: 0.3s;
+}
+
+.Navbar a:hover::before {
+    width: 100%;
+    height: 2px;
+    background-color: #cfcfcf;
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px;
+    }
+
+    .Navbar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 101;
+    }
+
+    .Navbar.active {
+        display: flex;
+    }
+
+    .Navbar a {
+        margin: 15px;
+        color: #fff;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Gambar */
+.bg-image {
+    position: relative;
+    width: 100%;
+    height: 50vh; /* Atur tinggi sebagai persentase dari viewport height */
+    overflow: hidden;
+}
+
+.bg-image img {
+    width: 100%;
+    height: 100%; /* Mengatur gambar untuk memenuhi tinggi elemen .bg-image */
+    object-fit: cover; /* Mengatur gambar agar menutupi area dengan proporsi yang sesuai */
+}
+
+/* Media querry Gambar */
+@media (max-width: 768px) {
+    .bg-image {
+        height: 40vh; /* Menyesuaikan tinggi untuk layar lebih kecil */
+    }
+}
+
+@media (max-width: 480px) {
+    .bg-image {
+        height: 30vh; /* Menyesuaikan tinggi untuk layar sangat kecil */
+    }
+}
+/* End Header */
+
+/* Media querry Gambar */
+@media (max-width: 768px) {
+    .bg-image {
+        height: 40vh; /* Menyesuaikan tinggi untuk layar lebih kecil */
+    }
+}
+
+@media (max-width: 480px) {
+    .bg-image {
+        height: 30vh; /* Menyesuaikan tinggi untuk layar sangat kecil */
+    }
+}
+/* End Header */
+
+/* Cart */
+
+#cart-status {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#cart-status:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .header {
+        justify-content: flex-start;
+        padding: 0 10px; /* Tambahkan padding jika perlu */
+    }
+
+    #cart-status {
+        margin-left: auto;
+        margin-right: 0; /* Sesuaikan margin-right agar tidak terlalu besar */
+        transform: translateX(-18rem); /* Hapus transformasi untuk menyesuaikan posisi */
+        font-size: 12px; /* Ukuran font yang lebih kecil untuk layar ponsel */
+        padding: 6px 10px; /* Sesuaikan padding agar lebih sesuai dengan layar ponsel */
+    }
+} 
+/* Cart */
+
+
+.item-top {
+    display: flex;
+    gap: 50px;
+    padding: 20px;
+}
+
+.product-category {
+    text-align: center;
+    background-color:rgba(207, 207, 207, 0.603) ;
+    flex: 1;
+    max-height: 600px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 10px;
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.add-to-cart-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #555;
+}
+
+/* Cart Pop-up */
+.cart-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.cart-popup.show {
+    display: block;
+    transform: translateX(0%);
+}
+
+.cart-popup.hide {
+    display: none;
+    transform: translateX(100%);
+}
+
+.cart-popup-content {
+    padding: 2rem;
+    position: relative;
+}
+
+.cart-popup h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid #000000;
+}
+
+.cart-popup ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.close-popup {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+#total-price {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+#checkout-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#checkout-btn:hover {
+    background-color: #555;
+}
+
+/* Tambahkan atau ubah CSS berikut */
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 1rem;
+}
+
+.cart-item-details {
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.cart-item-buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.cart-item-buttons button {
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+    margin: 0 0.25rem;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cart-item-buttons .increase,
+.cart-item-buttons .decrease {
+    font-weight: bold;
+}
+
+.cart-item-remove {
+    background-color: #ff4d4d;
+    color: rgb(0, 0, 0);
+}
+
+.cart-item-buttons button:hover {
+    opacity: 0.8;
+}
+/* End Cart Pop-up */
+
+
+        /* Footer */
+        footer {
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ccc;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-section {
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            width: 100px;
+        }
+
+        .nav-section {
+            margin-bottom: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .social-media-section {
+            display: flex;
+            flex-direction: row;
+            align-items: center; /* Center icons horizontally */
+            gap: 30px; /* Jarak antar ikon vertikal */
+        }
+
+        .social-icon {
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            color: #007bff;
+        }
+
+        @media (max-width: 768px) {
+    .footer-section {
+        align-items: flex-start;
+        /* Styling yang sesuai jika ada */
+    }
+
+    .nav-section {
+        display: flex; /* Menggunakan Flexbox */
+        flex-direction: column; /* Menampilkan item secara vertikal */
+        align-items: flex-start; /* Mengatur perataan item ke kiri */
+        margin-top: 20px; /* Atur jarak dari elemen lain jika diperlukan */
+    }
+
+    nav ul {
+        text-align: center;
+        list-style: none; /* Menghapus bullet point */
+        padding: 0; /* Menghapus padding default */
+        margin: 0; /* Menghapus margin default */
+        display: flex; /* Menggunakan Flexbox */
+        flex-direction: column; /* Menampilkan item secara vertikal */
+    }
+
+    nav ul li {
+        margin: 5px 0; /* Jarak antar item */
+    }
+
+    nav ul li a {
+        text-decoration: none; /* Menghapus garis bawah pada link */
+        color: #000; /* Menentukan warna teks */
+    }
+}
+
+    .social-media-section {
+        display: flex; /* Pastikan elemen ini menggunakan Flexbox */
+        flex-direction: row; /* Atur elemen-elemen anak secara horizontal */
+        justify-content: center; /* Posisikan item di tengah */
+        gap: 10px; /* Tambahkan jarak antar ikon jika diperlukan */
+    }
+
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .header {
+        padding: 20px 50px;
+    }
+
+    .logo img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .Navbar a {
+        margin-left: 20px;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .header {
+        padding: 20px 20px;
+    }
+
+    .logo img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .Navbar a {
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .item-top {
+        flex-direction: column;
+        padding-top: 5rem
+    }
+
+    .product-category {
+        width: 100%;
+    }
+
+    .products {
+        justify-content: center;
+    }
+
+    .product {
+        width: 90%;
+    }
+
+    .cart-popup-content {
+        width: 90%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 20px 10px;
+    }
+
+    .logo img {
+        height: 25px;
+        width: 25px;
+    }
+
+    .Navbar a {
+        font-size: 14px;
+        margin-left: 5px;
+    }
+
+    .item-top {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .product {
+        width: 100%;
+    }
+
+    .cart-popup {
+        width: 100%;
+    }
+}
+
+/* loading */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    border: 5px solid #000000; /* Darker border color */
+    border-top: 5px solid #fff; /* Bright white for contrast */
+    border-radius: 50%;
+    width: 60px; /* Slightly larger for better visibility */
+    height: 60px; /* Matching the width */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+body.loaded #loading-overlay {
+    display: none;
+}

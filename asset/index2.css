@@ -1,0 +1,710 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url('back.png') repeat;
+    background-size: 200px 200px; /* Menentukan ukuran gambar, sesuaikan ukuran sesuai kebutuhan */
+    background-position: center;
+}
+
+/* loading */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .loader {
+    border: 5px solid #000000; /* Darker border color */
+    border-top: 5px solid #fff; /* Bright white for contrast */
+    border-radius: 50%;
+    width: 60px; /* Slightly larger for better visibility */
+    height: 60px; /* Matching the width */
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  body.loaded #loading-overlay {
+    display: none;
+  }
+  /* loading */
+
+/* popup */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+}
+
+.popup-content {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    height: 80%;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-slider {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-slider h2 {
+    margin: 0;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.popup-swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.popup-swiper-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Swiper Button Styles */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000000;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+.swiper-button-prev {
+    left: 10px;
+}
+
+/* Swiper Pagination Styles */
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(0%);
+    z-index: 10;
+}
+
+/* Tanda Silang (Close Button) */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333; /* Warna teks tombol close */
+    cursor: pointer;
+    z-index: 12;
+}
+
+.popup-close:hover {
+    color: #ff0000; /* Warna saat hover untuk visual yang lebih baik */
+}
+
+
+/* popup */
+
+/* Navbar */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+}
+
+/* Mengatur posisi logo di kiri dan tombol menu di kanan */
+.header .logo {
+    order: 1;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    order: 2; /* Pindahkan tombol menu ke kanan */
+}
+
+.Navbar {
+    display: flex;
+    align-items: center;
+    order: 3; /* Posisi menu navigasi di kiri setelah logo dan tombol */
+}
+
+.Navbar a {
+    position: relative;
+    font-size: 18px;
+    color: rgb(145, 145, 145);
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+.Navbar a.highlighted {
+    color: #ffffffee;
+}
+
+.Navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: 0.3s;
+}
+
+.Navbar a:hover::before {
+    width: 100%;
+    height: 2px;
+    background-color: #cfcfcf;
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px;
+    }
+
+    .Navbar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 101;
+    }
+
+    .Navbar.active {
+        display: flex;
+    }
+
+    .Navbar a {
+        margin: 15px;
+        color: #fff;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+/* End Header */
+
+/* Welcome Video? */
+#NaiK {
+    position: relative;
+    padding-top: 30%; /* Aspect ratio 16:9 */
+    height: 0; /* Initial height is 0 */
+    overflow: hidden;
+    max-width: 100%; /* Ensures the container doesn't exceed the viewport width */
+    margin: auto; /* Centers the container horizontally */
+}
+
+#NaiK video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the container without stretching */
+}
+
+/* aboutus & about us*/
+.owner {
+    display: flex;
+    justify-content: space-between; /* Adjusts the spacing between the items */
+    gap: 20px; /* Space between .aboutus and .visimisi */
+    flex-wrap: wrap; /* Allows items to wrap onto the next line if there's not enough space */
+    width: 100%; /* Ensure the container spans the full width */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* aboutus */
+.aboutus {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    background: url(Black\ back.png);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.993);
+    margin: 0 auto;
+    flex: 1; /* Allows the item to grow and shrink as needed */
+    max-width: 48%; /* Adjusts the max width to fit two items side by side */
+}
+
+.aboutusimage {
+    max-width: 100px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.aboutustext p {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.aboutustext h2 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.aboutuscontent {
+    color: #ffffff;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.aboutuscontent h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.aboutuscontent p {
+    color: #ffffff;
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.button:hover {
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+}
+
+/* visimisi */
+.visimisi {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: url(Black\ back.png);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.993);
+    margin: 0 auto;
+    flex: 1; /* Allows the item to grow and shrink as needed */
+    max-width: 48%; /* Adjusts the max width to fit two items side by side */
+}
+
+.visimisicontent {
+    color: #d4d4d4;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.visimisicontent h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.visimisicontent h1 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.visimisicontent p {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.visimisicontent ol {
+    padding-left: 20px;
+}
+
+.visimisicontent ol li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Main Slide */
+.main-slide-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Memastikan elemen berada di tengah */
+    gap: 20px; /* Jarak antara main slide dan info slide */
+    padding: 20px;
+    background-color: #f0f0f094;
+}
+
+.main-slide {
+    width: 40%; /* Ukuran slide utama */
+    aspect-ratio: 16 / 9;
+    background-color: #ddd;
+    overflow: hidden;
+    position: relative;
+}
+
+.main-slide .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-slide .swiper-pagination {
+    bottom: 10px;
+}
+
+.main-slide .swiper-button-next,
+.main-slide .swiper-button-prev {
+    color: white;
+}
+
+.main-slide-info {
+    background: url(Black\ back.png);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.993);
+    width: 35%;
+    box-sizing: border-box; /* Agar padding tidak menambah ukuran total */
+}
+
+.main-slide-info h2 {
+    color: #cfcfcf;
+    text-align: center;
+}
+
+.main-slide-info p {
+    color: #cfcfcf;
+    text-align: justify;
+}
+/* Main Slide */
+
+/* Company Profile */
+.Cinema {  
+    margin-top: 0rem;
+    max-width: 700px;
+    padding: 20px;
+}
+
+.cinema {
+    transform: translateX(35rem);
+    text-align: center;
+    padding: 30px;
+    width: 100%;
+    max-width: 1200px;
+    background: url('Black\ back.png') no-repeat center center;
+    padding: 20px;
+    box-shadow: 0 5px 8px rgb(0, 0, 0); 
+    background-size: cover;
+    border-radius: 15px;
+    margin: 0 auto; /* Menambahkan margin auto untuk pemusatan horizontal */
+}
+
+.cinema h2 {
+    padding-bottom: 1rem;
+    color: #d4d4d4;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* End Company Profile*/
+
+/* Footer */
+footer {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ccc;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-section {
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 100px;
+}
+
+.nav-section {
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav ul li {
+    text-align: center;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.social-media-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center icons horizontally */
+    gap: 30px; /* Jarak antar ikon vertikal */
+}
+
+.social-icon {
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        align-items: flex-start;
+    }
+
+    .nav-section {
+        margin-top: 20px;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    .social-media-section {
+        justify-content: center;
+    }
+}
+
+/* Media Querry ISI */
+/* Responsive adjustments for screens smaller than 768px */
+@media (max-width: 768px) {
+    /* Adjustments for #NaiK */
+    #NaiK {
+        padding-top: 70%; /* Adjust aspect ratio to 16:9 on smaller screens */
+    }
+
+    /* Adjustments for .owner */
+    .owner {
+        flex-direction: column; /* Stacks the items vertically */
+        gap: 20px; /* Space between stacked items */
+    }
+
+    /* Adjustments for .aboutus and .visimisi */
+    .aboutus, .visimisi {
+        max-width: 90%; /* Ensures each section takes full width */
+    }
+
+    .aboutusimage {
+        max-width: 80px; /* Adjust image size */
+    }
+
+    .aboutustext h2, .aboutuscontent h2 {
+        font-size: 1.2rem; /* Adjust heading size */
+    }
+
+    .aboutustext p, .aboutuscontent p, .visimisicontent p {
+        font-size: 0.9rem; /* Adjust paragraph text size */
+    }
+
+    .button {
+        padding: 8px 16px; /* Adjust button padding */
+        font-size: 0.9rem; /* Adjust button font size */
+    }
+
+    /* Adjustments for .popup-content */
+    .popup-content {
+        width: 90%; /* Adjust width for smaller screens */
+        height: 90%; /* Increase height for better visibility */
+        max-width: none; /* Remove max-width constraint */
+    }
+
+    .popup-slider {
+        height: 85%; /* Adjust height for smaller screens */
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 30px; /* Adjust button size */
+        height: 30px; /* Adjust button size */
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    /* Adjustments for .main-slide-container */
+    .main-slide-container {
+        flex-direction: column; /* Stack elements vertically */
+        gap: 10px; /* Reduce gap between main slide and info slide */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .main-slide {
+        width: 100%; /* Membuat slide utama lebar penuh pada perangkat kecil */
+        aspect-ratio: auto; /* Menyesuaikan aspek rasio untuk perangkat kecil */
+        height: auto; /* Mengatur tinggi otomatis agar sesuai dengan gambar */
+    }
+    
+    .main-slide .swiper-slide img {
+        /* Pastikan gambar tetap menutupi seluruh area slide */
+        object-fit: cover;
+    }
+    .main-slide-info {
+        width: 100%; /* Full width on smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .main-slide-info h2,
+    .main-slide-info p {
+        font-size: 0.9rem; /* Adjust font size for better readability */
+    }
+    .main-slide .swiper-button-next,
+    .main-slide .swiper-button-prev {
+        width: 30px; /* Adjust button size */
+        height: 30px; /* Adjust button size */
+        font-size: 16px; /* Adjust font size for buttons */
+    }
+
+    /* Adjustments for .Cinema and .cinema */
+    .Cinema {
+        margin-top: 1rem; /* Adjust margin for better spacing */
+        padding: 10px; /* Adjust padding for smaller screens */
+        max-width: 100%; /* Ensure full width */
+    }
+
+    .cinema {
+        transform: translateX(0); /* Remove horizontal translation for smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+        max-width: 100%; /* Ensure full width */
+        border-radius: 10px; /* Adjust border radius for smaller screens */
+    }
+
+    .cinema h2 {
+        font-size: 1.2rem; /* Adjust font size for headings */
+    }
+
+    .video-container {
+        padding-bottom: 56.25%; /* Keep aspect ratio for video */
+        height: auto; /* Adjust height for better fit */
+    }
+}
